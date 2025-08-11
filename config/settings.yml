@@ -1,4 +1,4 @@
-TODO_plugin_name:
-  plugin_name_enabled:
+discourse_youtube_feed:
+  discourse_youtube_feed_enabled:
     default: false
     client: true

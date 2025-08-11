@@ -1,4 +1,4 @@
-# **Plugin Name** Plugin
+# **Discourse Youtube Feed** Plugin
 
 **Plugin Summary**
 

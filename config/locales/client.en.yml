@@ -3,7 +3,7 @@ en:
     admin:
       site_settings:
         categories:
-          TODO_plugin_name: "Plugin Name"
+          discourse_youtube_feed: "Discourse Youtube Feed"
   js:
-    discourse_plugin_name:
+    discourse_youtube_feed:
       placeholder: placeholder
