@@ -1,5 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import DButton from "discourse/components/d-button";
 import formatDate from "discourse/helpers/format-date";
@@ -28,18 +30,17 @@ export default class YoutubeVideos extends Component {
     window.open("https://www.youtube.com/@DailyMaverickSA/videos", "_blank");
   }
 
+  @action
+  openVideo(videoId) {
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+  }
+
   <template>
     <div class="youtube-videos-container">
       {{#if this.videos.length}}
         <div class="videos-grid">
           {{#each this.videos as |video|}}
-            <a
-              href="https://www.youtube.com/watch?v={{video.id}}"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="youtube-video-item"
-              style="text-decoration: none; color: inherit; display: block;"
-            >
+            <div class="youtube-video-item">
               <iframe
                 src="https://www.youtube.com/embed/{{video.id}}"
                 frameborder="0"
@@ -47,12 +48,21 @@ export default class YoutubeVideos extends Component {
                 allowfullscreen
                 title={{video.title}}
               ></iframe>
-              <h4 class="video-title">{{video.title}}</h4>
-              <p class="video-date">{{formatDate video.published_at}}</p>
-            </a>
 
+              <div
+                role="button"
+                tabindex="0"
+                class="video-info"
+                style="cursor: pointer;"
+                {{on "click" (fn this.openVideo video.id)}}
+              >
+                <p class="video-title">{{video.title}}</p>
+                <p class="video-date">{{formatDate video.published_at}}</p>
+              </div>
+            </div>
           {{/each}}
         </div>
+
         <div class="open-youtube-button-container">
           <DButton
             @action={{this.openYoutube}}
@@ -61,10 +71,6 @@ export default class YoutubeVideos extends Component {
             class="btn-primary"
           />
         </div>
-      {{else}}
-        <p class="no-videos-message">
-          No YouTube videos to show.
-        </p>
       {{/if}}
     </div>
   </template>

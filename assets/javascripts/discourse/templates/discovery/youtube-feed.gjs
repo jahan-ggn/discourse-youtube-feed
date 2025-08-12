@@ -5,9 +5,9 @@ import YoutubeVideos from "../../components/youtube-videos";
 
 export default RouteTemplate(
   <template>
-    <Layout>
+    <Layout @model={{@controller.model}}>
       <:navigation>
-        <Navigation />
+        <Navigation @createTopic={{@controller.createTopic}} />
       </:navigation>
 
       <:list>
