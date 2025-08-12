@@ -9,6 +9,7 @@ import { ajax } from "discourse/lib/ajax";
 
 export default class YoutubeVideos extends Component {
   @tracked videos = [];
+  @tracked isLoading = true;
 
   constructor() {
     super(...arguments);
@@ -17,11 +18,14 @@ export default class YoutubeVideos extends Component {
 
   @action
   async loadVideos() {
+    this.isLoading = true;
     try {
       const data = await ajax("/youtube-feed/videos");
       this.videos = data;
+      this.isLoading = false;
     } catch {
       this.videos = [];
+      this.isLoading = false;
     }
   }
 
@@ -37,7 +41,11 @@ export default class YoutubeVideos extends Component {
 
   <template>
     <div class="youtube-videos-container">
-      {{#if this.videos.length}}
+      {{#if this.isLoading}}
+        <div style="text-align: center;">
+          <div class="spinner medium"></div>
+        </div>
+      {{else if this.videos.length}}
         <div class="videos-grid">
           {{#each this.videos as |video|}}
             <div class="youtube-video-item">
