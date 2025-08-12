@@ -1,4 +1,4 @@
-en:
+en_GB:
   site_settings:
     discourse_youtube_feed_enabled: "Enable the YouTube feed plugin"
     discourse_youtube_feed_api_key: "YouTube Data API v3 key used to fetch videos"

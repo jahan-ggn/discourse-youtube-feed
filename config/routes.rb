@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 DiscourseYoutubeFeed::Engine.routes.draw do
-  get "/examples" => "examples#index"
-  # define routes here
+  get "/videos" => "feed#index"
 end
 
-Discourse::Application.routes.draw { mount ::DiscourseYoutubeFeed::Engine, at: "discourse-youtube-feed" }
+Discourse::Application.routes.draw { mount ::DiscourseYoutubeFeed::Engine, at: "youtube-feed" }

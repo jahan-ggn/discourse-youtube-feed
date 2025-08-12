@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
 # name: discourse-youtube-feed
-# about: TODO
-# meta_topic_id: TODO
+# about: Fetch and display the latest videos from a YouTube channel inside Discourse.
 # version: 0.0.1
-# authors: Discourse
-# url: TODO
-# required_version: 2.7.0
+# authors: Jahan Gagan
+# url: https://github.com/jahan-ggn/discourse-youtube-feed
 
 enabled_site_setting :discourse_youtube_feed_enabled
 
 module ::DiscourseYoutubeFeed
   PLUGIN_NAME = "discourse-youtube-feed"
+  STORE_KEY = "youtube_feed_data"
 end
 
 require_relative "lib/discourse_youtube_feed/engine"
+require_relative "app/models/discourse_youtube_feed/feed"
+register_asset "stylesheets/youtube-videos.scss"
 
 after_initialize do
-  # Code which should run after Rails has finished booting
+  Discourse::Application.routes.append do
+    get "/youtube-feed" => "discourse_youtube_feed/feed#show"
+  end
 end

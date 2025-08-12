@@ -1,4 +1,19 @@
-discourse_youtube_feed:
+plugins:
   discourse_youtube_feed_enabled:
     default: false
     client: true
+
+  discourse_youtube_feed_api_key:
+    default: ""
+    client: true
+    type: text
+
+  discourse_youtube_feed_channel_id:
+    default: ""
+    client: true
+    type: text
+
+  discourse_youtube_feed_max_results:
+    default: 4
+    client: true
+    type: integer
