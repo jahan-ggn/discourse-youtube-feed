@@ -71,6 +71,10 @@ export default class YoutubeVideos extends Component {
             class="btn-primary"
           />
         </div>
+      {{else}}
+        <p class="no-videos-message">
+          No YouTube videos to display at the moment.
+        </p>
       {{/if}}
     </div>
   </template>
