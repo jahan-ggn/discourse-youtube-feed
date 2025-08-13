@@ -18,7 +18,11 @@ require_relative "app/models/discourse_youtube_feed/feed"
 register_asset "stylesheets/youtube-videos.scss"
 
 after_initialize do
-  Discourse::Application.routes.append do
-    get "/youtube-feed" => "discourse_youtube_feed/feed#show"
+  if SiteSetting.discourse_youtube_feed_enabled
+    require File.expand_path('../jobs/scheduled/fetch_youtube_videos.rb', __FILE__)
+
+    Discourse::Application.routes.append do
+      get "/youtube-feed" => "discourse_youtube_feed/feed#show"
+    end
   end
 end

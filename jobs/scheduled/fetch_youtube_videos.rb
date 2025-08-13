@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::Jobs
+module Jobs
   class FetchYoutubeVideos < ::Jobs::Scheduled
     every 12.hours
 
